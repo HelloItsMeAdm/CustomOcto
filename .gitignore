@@ -83,3 +83,6 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+app/src/main/res/values/strings.xml
+app/apikey.properties
+app/google-services.json
