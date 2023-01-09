@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/webcam"
+        android:layout_width="640px"
+        android:layout_height="480px"
+        android:layout_centerInParent="true"
+        android:scaleX="2"
+        android:scaleY="2" />
+
+    <TextView
+        android:id="@+id/loadingWebcam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/webcam"
+        android:layout_alignTop="@id/webcam"
+        android:layout_alignEnd="@id/webcam"
+        android:layout_alignBottom="@id/webcam"
+        android:fontFamily="@font/manrope"
+        android:gravity="center"
+        android:text="Loading..."
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <ImageButton
+        android:id="@+id/refreshWebcamButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_centerVertical="true"
+        android:background="#00000000"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_baseline_refresh_24" />
+
+</RelativeLayout>

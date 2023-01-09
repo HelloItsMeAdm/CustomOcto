@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fillViewport="true"
+    android:theme="@style/MainTheme">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/manrope"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="CustomOcto"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="41sp" />
+
+        <RelativeLayout
+            android:id="@+id/box_temp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mainTitle"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/titleTemp"
+                android:layout_alignBottom="@id/content"
+                android:layout_marginBottom="-10dp"
+                android:alpha="0.25"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:id="@+id/titleTemp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/manrope_bold"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Database"
+                android:textColor="@color/white"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleTemp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/manrope"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

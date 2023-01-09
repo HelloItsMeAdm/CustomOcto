@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="gray">#9E9E9E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dark_gray">#0B0B0B</color>
+
+    <color name="border_default">#80FFFFFF</color>
+    <color name="border_heating">#FF5900</color>
+    <color name="border_cooling">#0074FF</color>
+
+    <color name="red">#FD491C</color>
+    <color name="green">#00C853</color>
+</resources>

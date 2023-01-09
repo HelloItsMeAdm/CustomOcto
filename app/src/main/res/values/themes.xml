@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
+    </style>
+
+    <style name="MainTheme">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="ToastAnimation" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/ToastAnimationAnimation</item>
+    </style>
+
+    <style name="ToastAnimationAnimation">
+        <item name="android:windowEnterAnimation">@anim/fadein</item>
+        <item name="android:windowExitAnimation">@anim/fadeout</item>
+        <item name="android:windowHideAnimation">@anim/fadeout</item>
+        <item name="android:windowShowAnimation">@anim/fadein</item>
+    </style>
+
+</resources>
