@@ -7,14 +7,15 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import java.util.Random;
 
 public class Notifications {
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void showNotification(Context context, String title, String message, int icon, Bitmap image, long when) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "printer";
@@ -27,7 +28,7 @@ public class Notifications {
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
         notificationBuilder.setAutoCancel(true)
@@ -43,6 +44,7 @@ public class Notifications {
         notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void showProgressNotification(Context context, String title, int progress, Bitmap image, String name, String willEndAt) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "printer";
@@ -55,7 +57,7 @@ public class Notifications {
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
         notificationBuilder.setAutoCancel(true)

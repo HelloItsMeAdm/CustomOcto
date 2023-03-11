@@ -45,4 +45,6 @@ dependencies {
 
     implementation 'jp.wasabeef:blurry:4.0.1'
     implementation 'org.ocpsoft.prettytime:prettytime:5.0.2.Final'
+
+    implementation 'androidx.work:work-runtime-ktx:2.8.0'
 }

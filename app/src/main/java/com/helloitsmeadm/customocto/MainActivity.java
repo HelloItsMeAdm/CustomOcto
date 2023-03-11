@@ -16,7 +16,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -32,14 +31,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,7 +49,6 @@ import org.json.JSONObject;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -63,8 +57,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TimeZone;
-import java.util.concurrent.atomic.AtomicReference;
 
 @SuppressLint("SetTextI18n")
 public class MainActivity extends AppCompatActivity {
@@ -165,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
     static Bitmap webcamImage;
     boolean logsHidden = false;
     boolean fileValueFull = false;
+    ArrayList<Long> usedNotifications = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -891,7 +884,9 @@ public class MainActivity extends AppCompatActivity {
                         tableBedTargetV = round(printerJson.getJSONObject("temperature").getJSONObject("bed").getDouble("target"), 1);
                         connected = true;
 
-                        Notifications.showProgressNotification(MainActivity.this, "Printed " + Math.round(progressBarV) + "%", (int) progressBarV, webcamImage, subtitleV, endAtTime);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            Notifications.showProgressNotification(MainActivity.this, "Printed " + Math.round(progressBarV) + "%", (int) progressBarV, webcamImage, subtitleV, endAtTime);
+                        }
                     } else {
                         // Unknown
                         titleV = "Error";
@@ -1105,16 +1100,30 @@ public class MainActivity extends AppCompatActivity {
 
                                     //Split at ;
                                     String[] split = notification.split(";");
+                                    long time = Long.parseLong(split[1]);
+
+                                    // if time is in usedNotifications, skip
+                                    if (usedNotifications.contains(time)) {
+                                        continue;
+                                    }
+
+                                    usedNotifications.add(time);
 
                                     switch (split[0]) {
                                         case "100":
-                                            Notifications.showNotification(MainActivity.this, "Print done!", "Your print is done!", R.drawable.notif_done, webcamImage, Long.parseLong(split[1]));
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                Notifications.showNotification(MainActivity.this, "Print done!", "Your print is done!", R.drawable.notif_done, webcamImage, time);
+                                            }
                                             break;
                                         case "101":
-                                            Notifications.showNotification(MainActivity.this, "Filament change!", "Please change your filament!", R.drawable.notif_filamentc, webcamImage, Long.parseLong(split[1]));
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                Notifications.showNotification(MainActivity.this, "Filament change!", "Please change your filament!", R.drawable.notif_filamentc, webcamImage, time);
+                                            }
                                             break;
                                         case "102":
-                                            Notifications.showNotification(MainActivity.this, "Filament runout!", "Your filament is running out!", R.drawable.notif_filamentr, webcamImage, Long.parseLong(split[1]));
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                Notifications.showNotification(MainActivity.this, "Filament runout!", "Your filament is running out!", R.drawable.notif_filamentr, webcamImage, time);
+                                            }
                                             break;
                                         case "200":
                                             runOnUiThread(() -> ToastManager.run(MainActivity.this, 3, R.drawable.ic_baseline_refresh_24, "Data refreshed!"));
